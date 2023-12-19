@@ -56,7 +56,6 @@
 											<td>{{ $product->stock }}</td>
                                             <td>
                                                 @if ($product->image)
-                                                    {{-- Asegúrate de que la ruta de la imagen sea accesible públicamente --}}
                                                     <img src="{{ asset('storage/' . $product->image) }}" width="100" height="auto" alt="{{ $product->name }}">
                                                 @else
                                                     No image available

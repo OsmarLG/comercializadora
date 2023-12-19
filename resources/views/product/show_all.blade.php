@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>All Products</h1>
+    <h1>Productos de Limpieza</h1>
     <div class="row">
         @foreach ($products as $product)
             <div class="col-md-4">
@@ -12,12 +12,14 @@
                         <h5 class="card-title">{{ $product->name }}</h5>
                         <p class="card-text">Description: {{ $product->description }}</p>
                         <p class="card-text">Price: ${{ $product->price }}</p>
-                        <p class="card-text">Stock: {{ $product->stock }}</p>
                     </div>
                 </div>
                 <br>
             </div>
         @endforeach
+        @if (count($products) == 0)
+            <p>No hay Productos para mostrar</p>
+        @endif
     </div>
 </div>
 @endsection

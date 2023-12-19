@@ -2,24 +2,57 @@
 
 @section('content')
 <div class="container">
-    <h1>Productos de Limpieza</h1>
+    <h3>Productos de Limpieza</h3>
     <div class="row">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <form action="{{ route('products.search') }}" method="GET">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Buscar producto" aria-label="Buscar producto" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {{ $products->appends(['search' => request()->query('search')])->links('pagination::bootstrap-5') }}
         @foreach ($products as $product)
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="{{ Storage::url($product->image) }}" class="card-img-top img-fluid" style="width: 100%; height:400px;" alt="{{ $product->name }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $product->name }}</h5>
-                        <p class="card-text">Description: {{ $product->description }}</p>
-                        <p class="card-text">Price: ${{ $product->price }}</p>
+        <div class="col-md-3">
+            <div class="card">
+                    {{-- <img src="{{ Storage::url($product->image) }}" class="card-img-top img-fluid" style="width: 100%; height:300px;" alt="{{ $product->name }}"> --}}
+                    <img src="{{ Storage::url($product->image) }}" class="card-img-top img-fluid" style="cursor:pointer; width: 100%; height:300px;" alt="{{ $product->name }}" data-bs-toggle="modal" data-bs-target="#imageModal-{{ $product->id }}">
+
+                    <div class="card-body" style="background:#ccf5ff; font-family: Arial, Helvetica, sans-serif;">
+                        <h5 class="card-title fw-bold">{{ $product->name }}</h5>
+                        <p class="card-text"><span class="fw-bold">Descripci&oacute;n:</span> {{ $product->description }}</p>
+                        <p class="card-text text-end fw-bold">Precio: ${{ $product->price }}</p>
                     </div>
                 </div>
                 <br>
             </div>
+
+            {{-- Modal para mostrar la imagen en pantalla completa --}}
+            <div class="modal fade" id="imageModal-{{ $product->id }}" tabindex="-1" aria-labelledby="imageModalLabel-{{ $product->id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="imageModalLabel-{{ $product->id }}">{{ $product->name }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="{{ Storage::url($product->image) }}" class="img-fluid mb-2" alt="{{ $product->name }}">
+                            <p><strong>Descripción:</strong> {{ $product->description }}</p>
+                            <p><strong>Precio:</strong> ${{ number_format($product->price, 2) }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endforeach
         @if (count($products) == 0)
-            <p>No hay Productos para mostrar</p>
+        <p>No hay Productos para mostrar</p>
         @endif
+        {{ $products->appends(['search' => request()->query('search')])->links('pagination::bootstrap-5') }}
     </div>
+    {{-- {{ $products->links('pagination::bootstrap-4') }} --}}
+    
 </div>
 @endsection

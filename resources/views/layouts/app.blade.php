@@ -20,12 +20,12 @@
     <div id="app">
 <nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm navbar-custom">
             <div class="container">
-                @if (!request()->is('show_products')) {{-- Añade esta línea --}}
+                @if (!request()->is('show_products') && !request()->is('show_products/search*'))
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <h3 class="text-white">@yield('title', 'Comercializadora')</h3>
+                        <h1 class="text-white">@yield('title', 'Comercializadora')</h1>
                     </a>
                 @else
-                    <h3 class="text-white">@yield('title', 'Comercializadora de Productos de Limpieza')</h3>
+                    <h1 class="text-white">@yield('title', 'Comercializadora de Productos de Limpieza')</h1>
                 @endif
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -42,7 +42,7 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                            @if (!request()->is('show_products')) {{-- Añade esta línea --}}
+                            @if (!request()->is('show_products') && !request()->is('show_products/search*'))
                                 @if (Route::has('login'))
                                     <li class="nav-item">
                                         <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>

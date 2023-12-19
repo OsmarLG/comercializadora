@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     public function __construct()
-{
-    $this->middleware('auth')->except('showProducts');
-}
+    {
+        $this->middleware('auth')->except(['showProducts', 'search']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,9 +29,18 @@ class ProductController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * $products->perPage());
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        
+        $products = Product::where('name', 'LIKE', "%{$search}%")->paginate(12);
+        
+        return view('product.show_all', compact('products'));
+    }
+
     public function showProducts()
     {
-        $products = Product::all(); // Obtener todos los productos
+        $products = Product::paginate(12); // Obtener todos los productos
         return view('product.show_all', compact('products')); // Retornar la vista con los productos
     }
 

@@ -25,3 +25,5 @@ Route::get('/show_products', [ProductController::class, 'showProducts'])->name('
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/show_products/search', [ProductController::class, 'search'])->name('products.search');

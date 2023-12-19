@@ -23,7 +23,7 @@
 
                     <div class="card-body" style="background:#ccf5ff; font-family: Arial, Helvetica, sans-serif;">
                         <h5 class="card-title fw-bold">{{ $product->name }}</h5>
-                        <p class="card-text"><span class="fw-bold">Descripci&oacute;n:</span> {{ $product->description }}</p>
+                        <p class="card-text"><span class="fw-bold">Descripci&oacute;n:</span> {{ Str::limit($product->description, 45) }}</p>
                         <p class="card-text text-end fw-bold">Precio: ${{ $product->price }}</p>
                     </div>
                 </div>

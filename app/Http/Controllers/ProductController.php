@@ -33,7 +33,7 @@ class ProductController extends Controller
     {
         $search = $request->input('search');
         
-        $products = Product::where('name', 'LIKE', "%{$search}%")->paginate(12);
+        $products = Product::where('description', 'LIKE', "%{$search}%")->paginate(12);
         
         return view('product.show_all', compact('products'));
     }

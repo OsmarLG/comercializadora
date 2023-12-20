@@ -39,7 +39,7 @@
                         <div class="form-group">
                             <strong>Image:</strong>
                             @if($product->image)
-                                <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}">
+                                <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" style="width: 80%;">
                             @endif
                         </div>
 

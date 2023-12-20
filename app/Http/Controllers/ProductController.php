@@ -24,8 +24,10 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::paginate();
+        
+        $filtro = false;
 
-        return view('product.index', compact('products'))
+        return view('product.index', compact('products', 'filtro'))
             ->with('i', (request()->input('page', 1) - 1) * $products->perPage());
     }
 
@@ -35,7 +37,15 @@ class ProductController extends Controller
         
         $products = Product::where('description', 'LIKE', "%{$search}%")->paginate(12);
         
-        return view('product.show_all', compact('products'));
+        $filtro = false;
+        
+        if ($search != null){
+            $resultados = 'Resultados de la búsqueda: ' . $search;
+            $filtro = true;
+            return view('product.show_all', compact('products', 'resultados', 'filtro'));
+        } else {
+            return view('product.show_all', compact('products', 'filtro'));
+        }
     }
 
     public function showProducts()

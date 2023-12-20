@@ -30,6 +30,8 @@
                     @endif
 
                     <div class="card-body">
+                        {!! $products->links('pagination::bootstrap-5') !!}
+
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
@@ -78,7 +80,8 @@
                         </div>
                     </div>
                 </div>
-                {!! $products->links() !!}
+                <br>
+                {!! $products->links('pagination::bootstrap-5') !!}
             </div>
         </div>
     </div>

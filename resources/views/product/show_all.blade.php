@@ -12,19 +12,30 @@
                         <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
                     </div>
                 </form>
+                @if ($filtro ?? false)
+                    <button class="btn"><a href="/show_products" class="btn btn-primary">Deshacer búsqueda</a></button>
+                @endif
             </div>
         </div>
+        
         {{ $products->appends(['search' => request()->query('search')])->links('pagination::bootstrap-5') }}
+        
+        @if ($resultados ?? '')
+            <br>
+                <p><span class="fw-bold">{{ $resultados}}</span></p>
+            <br>
+        @endif
+
         @foreach ($products as $product)
         <div class="col-md-3">
             <div class="card">
                     {{-- <img src="{{ Storage::url($product->image) }}" class="card-img-top img-fluid" style="width: 100%; height:300px;" alt="{{ $product->name }}"> --}}
-                    <img src="{{ Storage::url($product->image) }}" class="card-img-top img-fluid" style="cursor:pointer; width: 100%; height:300px;" alt="{{ $product->name }}" data-bs-toggle="modal" data-bs-target="#imageModal-{{ $product->id }}">
+                    <img src="{{ Storage::url($product->image) }}" class="card-img-top img-fluid" style="cursor:pointer;  width: 100%; height: 350px;" alt="{{ $product->name }}" data-bs-toggle="modal" data-bs-target="#imageModal-{{ $product->id }}">
 
                     <div class="card-body" style="background:#ccf5ff; font-family: Arial, Helvetica, sans-serif;">
-                        <h5 class="card-title fw-bold">{{ $product->name }}</h5>
+                        <h5 class="card-title fw-bold">{{ Str::limit($product->name, 20) }}</h5>
                         <p class="card-text"><span class="fw-bold">Descripci&oacute;n:</span> {{ Str::limit($product->description, 45) }}</p>
-                        <p class="card-text text-end fw-bold">Precio: ${{ $product->price }}</p>
+                        {{-- <p class="card-text text-end fw-bold">Precio: ${{ $product->price }}</p> --}}
                     </div>
                 </div>
                 <br>
@@ -51,6 +62,12 @@
         <p>No hay Productos para mostrar</p>
         @endif
         {{ $products->appends(['search' => request()->query('search')])->links('pagination::bootstrap-5') }}
+        
+        @if ($resultados ?? '')
+            <br>
+                <p><span class="fw-bold">{{ $resultados}}</span></p>
+            <br>
+        @endif
     </div>
     {{-- {{ $products->links('pagination::bootstrap-4') }} --}}
     

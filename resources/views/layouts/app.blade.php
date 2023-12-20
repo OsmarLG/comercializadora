@@ -15,10 +15,32 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    
+    <style>
+        /* Sticky footer styles */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        #app {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.05);
+            text-align: center;
+            padding: 10px 0; /* Ajusta el relleno según tus necesidades */
+        }
+    </style>
 </head>
 <body>
     <div id="app">
-<nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm navbar-custom">
+        <nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm navbar-custom">
             <div class="container">
                 @if (!request()->is('show_products') && !request()->is('show_products/search*'))
                     <a class="navbar-brand" href="{{ url('/') }}">
@@ -82,6 +104,117 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer class="text-center text-lg-start bg-light text-muted">
+            <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+                <!-- Left -->
+                {{-- <div class="me-5 d-none d-lg-block">
+                    <span>Conéctate con nosotros en las redes sociales:</span>
+                </div> --}}
+                <!-- Left -->
+        
+                <!-- Right -->
+                {{-- <div>
+                    <a href="" class="me-4 text-reset">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="" class="me-4 text-reset">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="" class="me-4 text-reset">
+                        <i class="fab fa-google"></i>
+                    </a>
+                    <a href="" class="me-4 text-reset">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="" class="me-4 text-reset">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="" class="me-4 text-reset">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div> --}}
+                <!-- Right -->
+            </section>
+        
+            <!-- Section: Links  -->
+            {{-- <section class="">
+                <div class="container text-center text-md-start mt-5">
+                    <div class="row mt-3">
+                        <!-- Company Info -->
+                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                <i class="fas fa-gem me-3"></i>Nombre de la Empresa
+                            </h6>
+                            <p>
+                                Aquí puedes usar filas y columnas para organizar tu contenido de pie de página o lo que sea que desees.
+                            </p>
+                        </div>
+                        <!-- Links -->
+                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                Productos
+                            </h6>
+                            <p>
+                                <a href="#!" class="text-reset">Angular</a>
+                            </p>
+                            <p>
+                                <a href="#!" class="text-reset">React</a>
+                            </p>
+                            <p>
+                                <a href="#!" class="text-reset">Vue</a>
+                            </p>
+                            <p>
+                                <a href="#!" class="text-reset">Laravel</a>
+                            </p>
+                        </div>
+                        <!-- Links -->
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                Enlaces Útiles
+                            </h6>
+                            <p>
+                                <a href="#!" class="text-reset">Precios</a>
+                            </p>
+                            <p>
+                                <a href="#!" class="text-reset">Configuraciones</a>
+                            </p>
+                            <p>
+                                <a href="#!" class="text-reset">Pedidos</a>
+                            </p>
+                            <p>
+                                <a href="#!" class="text-reset">Ayuda</a>
+                            </p>
+                        </div>
+                        <!-- Contact -->
+                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                Contacto
+                            </h6>
+                            <p><i class="fas fa-home me-3"></i> Ciudad, Estado, País</p>
+                            <p>
+                                <i class="fas fa-envelope me-3"></i>
+                                info@example.com
+                            </p>
+                            <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+                            <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                        </div>
+                    </div>
+                </div>
+            </section> --}}
+            <!-- Section: Links  -->
+        
+            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+                © {{ now()->year }} Derechos Reservados:
+                <a class="text-reset fw-bold" 
+                    @if (auth()->check())
+                        href="https://comercializadora.domcloud.dev/"
+                    @else
+                        href="https://comercializadora.domcloud.dev/show_products"    
+                    @endif
+                >comercializadora.domcloud.dev</a>
+            </div>
+        </footer>        
     </div>
 </body>
 </html>

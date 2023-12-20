@@ -52,7 +52,7 @@
                         <div class="modal-body">
                             <img src="{{ Storage::url($product->image) }}" class="img-fluid mb-2" alt="{{ $product->name }}">
                             <p><strong>Descripción:</strong> {{ $product->description }}</p>
-                            <p><strong>Precio:</strong> ${{ number_format($product->price, 2) }}</p>
+                            {{-- <p><strong>Precio:</strong> ${{ number_format($product->price, 2) }}</p> --}}
                         </div>
                     </div>
                 </div>
